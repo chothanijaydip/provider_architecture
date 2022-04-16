@@ -8,13 +8,13 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
   final Widget? staticChild;
 
   /// Fires once when the viewmodel is created or set for the first time
-  final Function(T?) onModelReady;
+  final Function(T)? onModelReady;
 
   /// Builder function with access to the model to build UI form
   final Widget Function(BuildContext, T, Widget?) builder;
 
   /// Deprecated: Use the viewModelBuilder for better ViewModel management
-  final T? viewModel;
+  final T viewModel;
 
   /// A builder function that returns the viewmodel for this widget
   final T Function() viewModelBuilder;
@@ -41,11 +41,11 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
   ViewModelProvider.withoutConsumer({
     required this.builder,
     required this.viewModelBuilder,
-    required this.onModelReady,
+    this.onModelReady,
     this.disposeViewModel = true,
     this.createNewModelOnInsert = false,
-    @Deprecated('Use viewModelBuilder for better viewModel management')
-        this.viewModel,
+    
+     required   this.viewModel,
     @Deprecated('Use the better named disposeViewModel property')
         this.reuseExisting = false,
   })  : providerType = _ViewModelProviderType.WithoutConsumer,
@@ -59,11 +59,11 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
     required this.builder,
     required this.viewModelBuilder,
     this.staticChild,
-   required this.onModelReady,
+    this.onModelReady,
     this.disposeViewModel = true,
     this.createNewModelOnInsert = false,
-    @Deprecated('Use viewModelBuilder for better viewModel management')
-        this.viewModel,
+    
+     required   this.viewModel,
     @Deprecated('Use the better named disposeViewModel property')
         this.reuseExisting = false,
   }) : providerType = _ViewModelProviderType.WithConsumer {
@@ -86,7 +86,9 @@ class _ViewModelProviderState<T extends ChangeNotifier?>
     if (_model == null) {
       _createOrSetViewModel();
 
-      widget.onModelReady(_model);
+      if (widget.onModelReady != null) {
+        widget.onModelReady!(_model);
+      }
     } else if (widget.createNewModelOnInsert) {
       _createOrSetViewModel();
     }
