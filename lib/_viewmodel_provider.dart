@@ -8,7 +8,7 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
   final Widget? staticChild;
 
   /// Fires once when the viewmodel is created or set for the first time
-  final Function(T) onModelReady;
+  final Function(T?) onModelReady;
 
   /// Builder function with access to the model to build UI form
   final Widget Function(BuildContext, T, Widget?) builder;
