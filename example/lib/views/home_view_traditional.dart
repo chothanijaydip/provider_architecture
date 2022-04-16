@@ -1,6 +1,6 @@
 import 'package:example/viewmodels/home_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:provider_architecture/provider_architecture.dart';
+import 'package:provider_architecture2/provider_architecture.dart';
 
 class HomeViewTraditional extends StatelessWidget {
   @override

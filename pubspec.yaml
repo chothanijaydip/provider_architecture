@@ -1,4 +1,4 @@
-name: provider_architecture
+name: provider_architecture2
 description: A set of widgets to help with the implementation of the chothanijaydip Provider Architecture
 version: 1.1.1+1
 homepage: https://github.com/chothanijaydip/provider_architecture
@@ -10,12 +10,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  provider: ^4.0.1
-  observable_ish: ^2.1.4
+  provider: ^6.0.2
+  observable_ish: ^3.0.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  # flutter_test:
+  #   sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,4 +1,4 @@
-library provider_architecture;
+library provider_architecture2;
 
 export '_provider_widget.dart';
 export '_viewmodel_provider.dart';
