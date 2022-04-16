@@ -8,7 +8,7 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
   final Widget? staticChild;
 
   /// Fires once when the viewmodel is created or set for the first time
-  final Function(T)? onModelReady;
+  final Function(T) onModelReady;
 
   /// Builder function with access to the model to build UI form
   final Widget Function(BuildContext, T, Widget?) builder;
@@ -41,7 +41,7 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
   ViewModelProvider.withoutConsumer({
     required this.builder,
     required this.viewModelBuilder,
-    this.onModelReady,
+    required this.onModelReady,
     this.disposeViewModel = true,
     this.createNewModelOnInsert = false,
     @Deprecated('Use viewModelBuilder for better viewModel management')
@@ -59,7 +59,7 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
     required this.builder,
     required this.viewModelBuilder,
     this.staticChild,
-    this.onModelReady,
+   required this.onModelReady,
     this.disposeViewModel = true,
     this.createNewModelOnInsert = false,
     @Deprecated('Use viewModelBuilder for better viewModel management')
@@ -86,9 +86,7 @@ class _ViewModelProviderState<T extends ChangeNotifier?>
     if (_model == null) {
       _createOrSetViewModel();
 
-      if (widget.onModelReady != null) {
-        widget.onModelReady!(_model);
-      }
+      widget.onModelReady(_model);
     } else if (widget.createNewModelOnInsert) {
       _createOrSetViewModel();
     }
