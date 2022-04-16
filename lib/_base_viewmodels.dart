@@ -18,7 +18,7 @@ class BaseViewModel extends ChangeNotifier {
   /// Sets the ViewModel to busy, runs the future and then sets it to not busy when complete.
   ///
   /// If a busyKey is su
-  Future runBusyFuture(Future busyFuture, {Object busyHascode}) async {
+  Future runBusyFuture(Future busyFuture, {Object? busyHascode}) async {
     setBusyForObject(this, true);
     var value = await busyFuture;
     setBusyForObject(this, false);
@@ -28,7 +28,7 @@ class BaseViewModel extends ChangeNotifier {
 
 /// A [BaseViewModel] that provides functionality to subscribe to a reactive service.
 class ReactiveViewModel extends BaseViewModel {
-  List<ReactiveServiceMixin> _reactiveServices;
+  late List<ReactiveServiceMixin> _reactiveServices;
   void reactToServices(List<ReactiveServiceMixin> reactiveServices) {
     _reactiveServices = reactiveServices;
     for (var reactiveService in _reactiveServices) {

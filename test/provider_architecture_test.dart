@@ -31,7 +31,7 @@ void main() {
             onPressed: () => model.increment(),
             child: Icon(Icons.add),
           ),
-        )),
+        )), viewModelBuilder: ()=> MyProvider(0),
       ),
     );
     expect(find.text('0'), findsOneWidget);
@@ -46,6 +46,7 @@ void main() {
     await tester.pumpWidget(
       ViewModelProvider<MyProvider>.withoutConsumer(
         viewModel: MyProvider(0),
+         viewModelBuilder: ()=> MyProvider(0),
         builder: (context, model, child) => MaterialApp(
             home: Scaffold(
           body: Text(

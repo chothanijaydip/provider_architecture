@@ -4,17 +4,17 @@ import 'package:provider/provider.dart';
 enum _ViewModelProviderType { WithoutConsumer, WithConsumer }
 
 /// A widget that provides base functionality for the Mvvm style provider architecture by FilledStacks.
-class ViewModelProvider<T extends ChangeNotifier> extends StatefulWidget {
-  final Widget staticChild;
+class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
+  final Widget? staticChild;
 
   /// Fires once when the viewmodel is created or set for the first time
-  final Function(T) onModelReady;
+  final Function(T)? onModelReady;
 
   /// Builder function with access to the model to build UI form
-  final Widget Function(BuildContext, T, Widget) builder;
+  final Widget Function(BuildContext, T, Widget?) builder;
 
   /// Deprecated: Use the viewModelBuilder for better ViewModel management
-  final T viewModel;
+  final T? viewModel;
 
   /// A builder function that returns the viewmodel for this widget
   final T Function() viewModelBuilder;
@@ -39,8 +39,8 @@ class ViewModelProvider<T extends ChangeNotifier> extends StatefulWidget {
 
   /// Constructs a viewmodel provider that will not rebuild the provided widget when notifyListeners is called.
   ViewModelProvider.withoutConsumer({
-    @required this.builder,
-    @required this.viewModelBuilder,
+    required this.builder,
+    required this.viewModelBuilder,
     this.onModelReady,
     this.disposeViewModel = true,
     this.createNewModelOnInsert = false,
@@ -56,8 +56,8 @@ class ViewModelProvider<T extends ChangeNotifier> extends StatefulWidget {
 
   /// Constructs a viewmodel provider that fires the builder function when notifyListeners is called in the viewmodel.
   ViewModelProvider.withConsumer({
-    @required this.builder,
-    @required this.viewModelBuilder,
+    required this.builder,
+    required this.viewModelBuilder,
     this.staticChild,
     this.onModelReady,
     this.disposeViewModel = true,
@@ -75,9 +75,9 @@ class ViewModelProvider<T extends ChangeNotifier> extends StatefulWidget {
   _ViewModelProviderState<T> createState() => _ViewModelProviderState<T>();
 }
 
-class _ViewModelProviderState<T extends ChangeNotifier>
-    extends State<ViewModelProvider<T>> {
-  T _model;
+class _ViewModelProviderState<T extends ChangeNotifier?>
+    extends State<ViewModelProvider<T?>> {
+  T? _model;
 
   @override
   void initState() {
@@ -87,7 +87,7 @@ class _ViewModelProviderState<T extends ChangeNotifier>
       _createOrSetViewModel();
 
       if (widget.onModelReady != null) {
-        widget.onModelReady(_model);
+        widget.onModelReady!(_model);
       }
     } else if (widget.createNewModelOnInsert) {
       _createOrSetViewModel();
@@ -127,7 +127,7 @@ class _ViewModelProviderState<T extends ChangeNotifier>
         value: _model,
         child: Consumer(
           builder: widget.builder,
-          child: widget.staticChild,
+          child: widget.staticChild!,
         ),
       );
     }
@@ -136,7 +136,7 @@ class _ViewModelProviderState<T extends ChangeNotifier>
       create: (context) => _model,
       child: Consumer(
         builder: widget.builder,
-        child: widget.staticChild,
+        child: widget.staticChild!,
       ),
     );
   }
