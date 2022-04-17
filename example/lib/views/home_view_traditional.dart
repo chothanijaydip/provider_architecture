@@ -23,7 +23,7 @@ class HomeViewTraditional extends StatelessWidget {
 
 class UpdateTitleButton extends ProviderWidget<HomeViewModel> {
   UpdateTitleButton({
-    Key key,
+    Key? key,
   }) : super(key: key, listen: false);
 
   @override

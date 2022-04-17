@@ -9,7 +9,7 @@ class FullNameWidget extends ProviderWidget<Human> {
       children: <Widget>[
         Container(
           child: Text(
-            model.name,
+            model.name!,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           ),
         ),
@@ -18,7 +18,7 @@ class FullNameWidget extends ProviderWidget<Human> {
         ),
         Container(
           child: Text(
-            model.surname,
+            model.surname!,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           ),
         ),

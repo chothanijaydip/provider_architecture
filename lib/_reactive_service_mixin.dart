@@ -2,7 +2,7 @@ import 'package:observable_ish/observable_ish.dart';
 
 /// Adds functionality to easily listen to all reactive values in a service
 mixin ReactiveServiceMixin {
-  List<Function> _listeners =[];
+  List<Function> _listeners = [];
 
   void listenToReactiveValues(List<RxValue> reactiveValues) {
     for (var reactiveValue in reactiveValues) {

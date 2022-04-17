@@ -8,13 +8,13 @@ class DuplicateNameWidget extends ProviderWidget<Human> {
     return Row(
       children: <Widget>[
         Container(
-          child: Text(model.name),
+          child: Text(model.name!),
         ),
         SizedBox(
           width: 50,
         ),
         Container(
-          child: Text(model.name),
+          child: Text(model.name!),
         ),
       ],
     );

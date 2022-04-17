@@ -14,7 +14,7 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
   final Widget Function(BuildContext, T, Widget?) builder;
 
   /// Deprecated: Use the viewModelBuilder for better ViewModel management
-  final T viewModel;
+  final T? viewModel;
 
   /// A builder function that returns the viewmodel for this widget
   final T Function() viewModelBuilder;
@@ -44,8 +44,8 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
     this.onModelReady,
     this.disposeViewModel = true,
     this.createNewModelOnInsert = false,
-    
-     required   this.viewModel,
+    @Deprecated('Use viewModelBuilder for better viewModel management')
+        this.viewModel,
     @Deprecated('Use the better named disposeViewModel property')
         this.reuseExisting = false,
   })  : providerType = _ViewModelProviderType.WithoutConsumer,
@@ -62,8 +62,8 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
     this.onModelReady,
     this.disposeViewModel = true,
     this.createNewModelOnInsert = false,
-    
-     required   this.viewModel,
+    @Deprecated('Use viewModelBuilder for better viewModel management')
+        this.viewModel,
     @Deprecated('Use the better named disposeViewModel property')
         this.reuseExisting = false,
   }) : providerType = _ViewModelProviderType.WithConsumer {
@@ -127,7 +127,7 @@ class _ViewModelProviderState<T extends ChangeNotifier?>
         value: _model,
         child: Consumer(
           builder: widget.builder,
-          child: widget.staticChild!,
+          child: widget.staticChild,
         ),
       );
     }
@@ -136,7 +136,7 @@ class _ViewModelProviderState<T extends ChangeNotifier?>
       create: (context) => _model,
       child: Consumer(
         builder: widget.builder,
-        child: widget.staticChild!,
+        child: widget.staticChild,
       ),
     );
   }
