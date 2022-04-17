@@ -76,7 +76,7 @@ class ViewModelProvider<T extends ChangeNotifier?> extends StatefulWidget {
 }
 
 class _ViewModelProviderState<T extends ChangeNotifier?>
-    extends State<ViewModelProvider<T?>> {
+    extends State<ViewModelProvider<T>> {
   T? _model;
 
   @override
@@ -87,7 +87,7 @@ class _ViewModelProviderState<T extends ChangeNotifier?>
       _createOrSetViewModel();
 
       if (widget.onModelReady != null) {
-        widget.onModelReady!(_model);
+        widget.onModelReady!(_model!);
       }
     } else if (widget.createNewModelOnInsert) {
       _createOrSetViewModel();
@@ -110,13 +110,13 @@ class _ViewModelProviderState<T extends ChangeNotifier?>
       if (widget.reuseExisting || !widget.disposeViewModel) {
         return ChangeNotifierProvider.value(
           value: _model,
-          child: widget.builder(context, _model, widget.staticChild),
+          child: widget.builder(context, _model!, widget.staticChild),
         );
       }
 
       return ChangeNotifierProvider(
         create: (context) => _model,
-        child: widget.builder(context, _model, widget.staticChild),
+        child: widget.builder(context, _model!, widget.staticChild),
       );
     }
 
